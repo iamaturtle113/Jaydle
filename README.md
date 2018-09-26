@@ -1,2 +1,3 @@
-# Youtube-Dl-Extended
-Enhance usabillity of youtube-dl
+# Jaydle
+Enhance usabillity of youtube-dl.
+JaVa Youtube-DL Extended
