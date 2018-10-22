@@ -10,4 +10,6 @@ It worked on my Ubuntu.
 Cheeres!!
 
 irecommendthis
-https://www.youtube.com/watch?v=AEvZX-u4cGg
+https://www.youtube.com/watch?v=AEvZX-u4cGg This is 2pac tune myself an artist here https://soundcloud.com/pivbhclgl1fa/tracks 
+
+180407 1748A0 LVE quite large live.MP3 is preferable. 
