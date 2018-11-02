@@ -255,12 +255,18 @@ public class JaydleProto01SwingWorker extends JFrame
 					url=strIn;
 					cmdListSetter(strIn);
 					printList(cmdList);
+<<<<<<< HEAD
 					
 					//dlAudio(strIn);
 				bgt=new BackgroundTask();
 				
 					bgt.execute();
 					
+=======
+					dlAudio(strIn);
+					bgt=new BackgroundTask();
+					bgt.execute();
+>>>>>>> 8f71390b915ba4c33f7c7f7b7f9777a5fbdec57a
 					
 		}
 	}
