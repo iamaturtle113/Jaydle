@@ -44,8 +44,9 @@ public class JaydleProto01SwingWorker extends JFrame
 	 static String initText=("URLを入力してください");
 	 static JTextField textIn=new JTextField(initText);
 	 static String strIn=null;
-	 static List<String> cmdList=new ArrayList<String>();
+	 static List<String> cmdList= new ArrayList<>(Arrays.asList("youtube-dl","--no-playlist","--extract-audio","--audio-format","mp3","-o","'%(title)s.%(ext)s'"));
 	 static String url;//="https://www.youtube.com/watch?v=FqVTzr3CfEg";
+	// String[] audioDl= {"youtube-dl","--no-playlist","--extract-audio","--audio-format","mp3",url,"-o","'%(title)s.%(ext)s'"};
 	 
 	 BackgroundTask bgt;
 	 
@@ -69,20 +70,32 @@ public class JaydleProto01SwingWorker extends JFrame
 				//最後まで読み込むと、lineがnullになることを利用している
 					{
 						println(line);
-						textOut.append(line+"\n");
-						this.publish(line);
+						//textOut.append(line+"\n");
+						publish(line);
 					}
 					while((line=bfrErr.readLine())!=null)
 					//最後まで読み込むと、lineがnullになることを利用している
 					{
 						println(line);
-						textOut.append(line+"\n");
-						this.publish(line);
+						//textOut.append(line+"\n");
+						publish(line);
 					}
 			}
-			catch(Exception e)
+
+			/*catch(Exception e)
 			{
 				e.printStackTrace();
+			}*/
+			catch(NullPointerException e)
+			{
+				println("NullPo!!!");
+				e.printStackTrace();
+				
+			}
+			finally
+			{
+			//cmdList.clear();
+				cmdList.remove(5);
 			}
 			
 			return null;
@@ -91,9 +104,18 @@ public class JaydleProto01SwingWorker extends JFrame
 		@Override
 		protected void process(List<String> lines)
 		{
-			for(String line:lines)
+			try
 			{
-				textOut.append(line+"\n");
+				for(String line:lines)
+				{
+					textOut.append(line+"\n");
+				}
+			}
+			catch(NullPointerException e)
+			{
+				println("NullPo!!!");
+				e.printStackTrace();
+				
 			}
 		}
 		
@@ -104,6 +126,7 @@ public class JaydleProto01SwingWorker extends JFrame
 			{
 				int result=get();
 				textOut.append("result is "+result);
+				cmdList.clear();
 			}
 			catch(Exception ex)
 			{}
@@ -167,13 +190,14 @@ public class JaydleProto01SwingWorker extends JFrame
 		processBuild(listA);
 	}
 	
+	
 	public static void cmdListSetter(String url)
 	{
-		String[] audioDl= {"youtube-dl","--no-playlist","--extract-audio","--audio-format","mp3",url,"-o","'%(title)s.%(ext)s'"};
+		//String[] audioDl= {"youtube-dl","--no-playlist","--extract-audio","--audio-format","mp3",url,"-o","'%(title)s.%(ext)s'"};
 		println("From cmdListGenerator: content of variable url = "+url);
 		//cmdList.set(5,url);
 		//printList(audioDl);
-		cmdList=toList(audioDl);
+		cmdList.add(5,url);
 	}
 	
 	
@@ -231,9 +255,12 @@ public class JaydleProto01SwingWorker extends JFrame
 					url=strIn;
 					cmdListSetter(strIn);
 					printList(cmdList);
-					dlAudio(strIn);
 					
-					//bgt.execute();
+					//dlAudio(strIn);
+				bgt=new BackgroundTask();
+				
+					bgt.execute();
+					
 					
 		}
 	}
