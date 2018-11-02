@@ -232,8 +232,8 @@ public class JaydleProto01SwingWorker extends JFrame
 					cmdListSetter(strIn);
 					printList(cmdList);
 					dlAudio(strIn);
-					
-					//bgt.execute();
+					bgt=new BackgroundTask();
+					bgt.execute();
 					
 		}
 	}
